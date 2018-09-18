@@ -1,0 +1,19 @@
+RDD 是一个基本的抽象，操作RDD就像操作一个本地集合一样，降低了编程的复杂读
+RDD 算子分为俩类，一类是transformation 一类是action 它会执行任务触发执行
+
+创建RDD 方式
+    1.通过外部存储系统创建RDD
+    2.将Driver的 "scala集合" 通过并行化的方式编程RDD(实验测试阶段使用)
+    3.调用一个已经存在的RDD的transfromation 会生成新的RDD
+
+
+1.创建RDD
+   (1) val rdd1 = sc.textFile("hdfs://mini1:9000") // 这是一个lazy
+       rdd1.count   //开始执行 这是一个action
+
+   (2)  var arr = Array(1,2,3,4,5,6,7,8,9,0,11) Driver 端的
+        val rdd4 = sc.parallelize(arr)
+        sc.makeRDD(List(2,3,4,5,6,7,8,9))
+2.RDD算子
+
+

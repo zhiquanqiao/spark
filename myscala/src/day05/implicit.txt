@@ -1,0 +1,8 @@
+implicit def double2Int(d:Double) = d.toInt
+val a:Int = 3.14
+
+
+implicit 详解
+
+
+
