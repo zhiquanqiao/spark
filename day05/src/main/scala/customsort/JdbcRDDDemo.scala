@@ -11,7 +11,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 object JdbcRddDemo {
 
   val getConn = () => {
-    DriverManager.getConnection("jdbc:mysql://localhost:3306/bigdata?characterEncoding=UTF-8", "root", "123568")
+    DriverManager.getConnection("jdbc:mysql://localhost:3306/bigdata?characterEncoding=UTF-8", "root", "123456")
   }
 
 
@@ -24,10 +24,13 @@ object JdbcRddDemo {
     //创建RDD，这个RDD会记录以后从MySQL中读数据
 
     //new 了RDD，里面没有真正要计算的数据，而是告诉这个RDD，以后触发Action时到哪里读取数据
+    /**
+      * 分区的数量影响读取的数量
+      */
     val jdbcRDD: RDD[(Int, String, Int)] = new JdbcRDD(
       sc,
       getConn,
-      "SELECT * FROM logs WHERE id >= ? AND id < ?",
+      "SELECT * FROM logs WHERE id >= ? AND id <= ?",
       1,
       5,
       2, //分区数量
